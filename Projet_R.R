@@ -13,6 +13,8 @@ summary(bodyfat)
 hist(bodyfat[,1],50)
 #On observe potentiellment des valeurs abérrantes
 
+# Univarié pas suffisant
+
 library(PCAmixdata)
 require(PCAmixdata)
 res<-PCAmix(bodyfat)
