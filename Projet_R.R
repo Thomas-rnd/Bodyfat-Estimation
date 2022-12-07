@@ -37,9 +37,10 @@ hist(bodyfat[,1],50) # 4 valeurs à retirer (3 à droite) (entre 3 et 35)
 hist(bodyfat[,2],50) #Dépend du recrutement pas narmalement distrubé normal
 hist(bodyfat[,4],50)# 2 valeurs à retirer (à droite) (entre 65 et 76)
 
-bodyfat<-(bodyfat[-180,])
-bodyfat<-(bodyfat[-170,])
-bodyfat<-(bodyfat[-180,])
+bodyfat<-subset(bodyfat,bodyfat[,1]>=3)
+bodyfat<-subset(bodyfat,bodyfat[,1]<=35)
+bodyfat<-subset(bodyfat,bodyfat[,4]>=65)
+bodyfat<-subset(bodyfat,bodyfat[,4]<=76)
 
 plot(res,axes=c(1,2),choice="cor")
 plot(res,axes=c(1,2),choice="ind")
