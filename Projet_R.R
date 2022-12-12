@@ -95,5 +95,11 @@ arrows(0,0,cor(bodyfat[,1],res2$scores)[1],cor(bodyfat[,1],res2$scores)[2],col=2
 
 arrows(0,0,cor(bodyfat[,2],res2$scores)[1],cor(bodyfat[,2],res2$scores)[2],col=3,xlim=c(-1, 1) * 1.3,ylim=c(-1, 1) * 1.3,lwd=3)   # variable Age (en vert)
 
+#Regression linéaire
 
+# Modele 1 (modele complet)
+#===========================
+data<-data.frame(bodyfat)
 
+mod1<-lm(Pct.BF~data[,-1],data)
+summary(mod1)
