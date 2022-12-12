@@ -101,5 +101,35 @@ arrows(0,0,cor(bodyfat[,2],res2$scores)[1],cor(bodyfat[,2],res2$scores)[2],col=3
 #===========================
 data<-data.frame(bodyfat)
 
-mod1<-lm(Pct.BF~data[,-1],data)
+mod1<-lm(Pct.BF~.,data)
 summary(mod1)
+#Etudier la validité de ce modèle, potentiellment bcp de variables pas 
+#utiles/pertinentes
+
+# Selection de variables
+#========================
+step(mod1)
+
+# Modele 2 (modele simplifie)
+#============================
+mod2 <- lm(formula = Pct.BF ~ Age + Height + Neck + Abdomen + Hip + Thigh + 
+             Forearm + Wrist, data)
+summary(mod2)
+
+shapiro.test(mod2$residuals)
+#Résidus bien distrubué suivant loi normale
+plot(mod2$fitted,mod2$residuals) 
+#Pas d'organisation particulière
+abline(h=0)
+
+# Prédiction/Test
+#============================
+
+#On peut créer un modèle sur 125 valeurs et regarder son comportement sur la prédiction
+#des 125 autres valeurs
+
+
+
+
+
+
