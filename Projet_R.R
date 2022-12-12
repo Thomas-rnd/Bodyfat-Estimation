@@ -99,7 +99,7 @@ arrows(0,0,cor(bodyfat[,2],res2$scores)[1],cor(bodyfat[,2],res2$scores)[2],col=3
 
 # Modele 1 (modele complet)
 #===========================
-data<-data.frame(bodyfat)
+data<-data.frame(bodyfat[1:200])
 
 mod1<-lm(Pct.BF~.,data)
 summary(mod1)
@@ -125,8 +125,18 @@ abline(h=0)
 # Prédiction/Test
 #============================
 
-#On peut créer un modèle sur 125 valeurs et regarder son comportement sur la prédiction
-#des 125 autres valeurs (marche pas à voir)
+#On peut créer un modèle sur 200 valeurs et regarder son comportement sur la prédiction
+#des 39 autres valeurs
+BFpredict<-predict(mod2,data.frame(bodyfat[201:239,]),interval="prediction",level=0.95)
+ecartPredict<-BFpredict[,1]*(100/bodyfat[201:239,1])
+plot(BFpredict[,1],bodyfat[201:239,1])
+abline(0,1,col=2)
+abline(-8,1,col=1)
+abline(8,1,col=1)
+
+plot((BFpredict[,1]-bodyfat[201:239,1])*100/bodyfat[201:239,1])
+abline(h=-25,col=2)
+abline(h=25,col=2)
 
 
 
