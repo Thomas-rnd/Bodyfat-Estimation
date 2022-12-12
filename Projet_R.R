@@ -126,7 +126,7 @@ abline(h=0)
 #============================
 
 #On peut créer un modèle sur 125 valeurs et regarder son comportement sur la prédiction
-#des 125 autres valeurs
+#des 125 autres valeurs (marche pas à voir)
 
 
 
