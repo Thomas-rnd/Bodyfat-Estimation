@@ -5,10 +5,9 @@ bodyfat<-donneesProjet
 #la corélation de certaines d'entre elles. 
 library(corrplot)
 M = cor(bodyfat)
-corrplot(M, method = 'square', order = 'FPC', type = 'lower', diag = FALSE)
-plot(bodyfat)
-
-boxplot(bodyfat)
+corrplot(M, method = 'square', order = 'FPC', type = 'lower', diag = FALSE, main="Représensation de la corrélation entre les variables d'estimation de la masse graisseuse")
+plot(bodyfat, main="Représensation des individus sur un plan de variables")
+boxplot(bodyfat,main="Mise en évidence des valeurs extrêmes par variables")
 summary(bodyfat)
 #Les valeurs à l'extérieur des moustaches sont représenté par des points 
 #On ne peut pas dire que se sont des observations abéreantes. Par contre cela
@@ -17,7 +16,6 @@ summary(bodyfat)
 #analytique en étudiant les valeurs aberrantes dans leur globalité. On va 
 #vérifier la normalité de chacune des dimensions propres de l'ACP.
 
-hist(bodyfat[,1],50)
 #On observe potentiellment des valeurs abérrantes
 # Univarié pas suffisant pour conclure 
 
