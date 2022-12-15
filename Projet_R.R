@@ -9,15 +9,16 @@ corrplot(M, method = 'square', order = 'FPC', type = 'lower', diag = FALSE, main
 plot(bodyfat, main="Représensation des individus sur un plan de variables")
 boxplot(bodyfat,main="Mise en évidence des valeurs extrêmes par variables")
 summary(bodyfat)
-#Les valeurs à l'extérieur des moustaches sont représenté par des points 
-#On ne peut pas dire que se sont des observations abéreantes. Par contre cela
-#indique qu'il faut étudier plus en détail ces obsevations. 
-#Nous ne sommes pas des spécialistes des variables étudié. On va suivre une démarche
+#Les valeurs à l'extérieur des moustaches sont représentées par des points 
+#On ne peut pas dire que ce sont des observations aberrantes. Par contre cela
+#indique qu'il faut étudier plus en détail ces observations. 
+#Nous ne sommes pas des spécialistes des variables étudiées. On va suivre une démarche
 #analytique en étudiant les valeurs aberrantes dans leur globalité. On va 
 #vérifier la normalité de chacune des dimensions propres de l'ACP.
 
-#On observe potentiellment des valeurs abérrantes
+#On observe potentiellement des valeurs aberrantes
 # Univarié pas suffisant pour conclure 
+
 
 library(PCAmixdata)
 require(PCAmixdata)
@@ -54,12 +55,13 @@ plot(res,axes=c(1,2),choice="sqload")
 #=> pas de problèmes pour Age, Height
 
 #On regarde les hist pour nous aider
-hist(bodyfat[,1],50) # 4 valeurs à retirer (3 à droite) (entre 3 et 35)
-hist(bodyfat[,2],50) #Dépend du recrutement pas narmalement distrubé normal
-hist(bodyfat[,4],50)# 2 valeurs à retirer (à droite) (entre 65 et 76)
+hist(bodyfat[,1],50, xlab='Pct.BF', main="Histogramme des individus suivant Pct.BF") # 4 valeurs à retirer (3 à droite) (entre 3 et 35)
+hist(bodyfat[,2],50, xlab='Age', main="Histogramme des individus suivant Age") #Dépend du recrutement pas normalement distrubé normal
+hist(bodyfat[,4],50, xlab='Height', main="Histogramme des individus suivant Height")# 2 valeurs à retirer (à droite) (entre 65 et 76)
 
 bodyfat<-subset(bodyfat,bodyfat[,1]>=3)
 bodyfat<-subset(bodyfat,bodyfat[,1]<=35)
+bodyfat<-subset(bodyfat,bodyfat[,2]<=75)
 bodyfat<-subset(bodyfat,bodyfat[,4]>=65)
 bodyfat<-subset(bodyfat,bodyfat[,4]<=76)
 
@@ -71,7 +73,7 @@ plot(res,axes=c(1,5),choice="sqload")
 #Bien représenté Height,Ankle
 #On a déja fait le tri dans Height donc on regarde uniquement Ankle
 
-hist(bodyfat[,11],50)#On supprime valeurs >30
+hist(bodyfat[,11],50,xlab='Ankle', main="Histogramme des individus suivant Ankle")#On supprime valeurs >30
 bodyfat<-subset(bodyfat,bodyfat[,11]<30)#Suppression des valeurs
 
 #Nouvelle ACP
@@ -89,6 +91,7 @@ round(res$eig,digit=2)
 round(res$quanti$cos2,digits=3)
 #Kaiser >1 donc dim 1 et 2 interessantes. Cos2 dans dim 3 <0.3 
 
+plot(res2,axes=c(1,2),choice="sqload")
 plot(res2,axes=c(1,2),choice="cor")
 plot(res2,axes=c(1,2),choice="ind")
 
