@@ -141,7 +141,7 @@ abline(8,1,col=1)
 
 plot((BFpredict[,1]-bodyfat[220:239,1])*100/bodyfat[220:239,1])
 abline(h=-0,col=2)
-#Potentiellement les grosses erreurs d'estimation pour personnes très musclés
+#Potentiellement, les grosses erreurs d'estimation pour personnes très musclés
 #Pas forcément de rapport physiologique entre "grosseur" et masse grasse
 
 
