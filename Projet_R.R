@@ -3,6 +3,9 @@ bodyfat<-donneesProjet
 
 #Représentation deux à deux des variables du jeu de données permettant d'inférer sur
 #la corélation de certaines d'entre elles. 
+library(corrplot)
+M = cor(bodyfat)
+corrplot(M, method = 'square', order = 'FPC', type = 'lower', diag = FALSE)
 plot(bodyfat)
 
 boxplot(bodyfat)
@@ -99,7 +102,8 @@ arrows(0,0,cor(bodyfat[,2],res2$scores)[1],cor(bodyfat[,2],res2$scores)[2],col=3
 
 # Modele 1 (modele complet)
 #===========================
-data<-data.frame(bodyfat[1:200])
+data<-data.frame(bodyfat[1:220,])
+#Discuter du nombre de données pour avoir un entraînement du modèle suffisant
 
 mod1<-lm(Pct.BF~.,data)
 summary(mod1)
@@ -117,7 +121,7 @@ mod2 <- lm(formula = Pct.BF ~ Age + Height + Neck + Abdomen + Hip + Thigh +
 summary(mod2)
 
 shapiro.test(mod2$residuals)
-#Résidus bien distrubué suivant loi normale
+#Résidus bien distrubué suivant loi normale 
 plot(mod2$fitted,mod2$residuals) 
 #Pas d'organisation particulière
 abline(h=0)
@@ -127,16 +131,15 @@ abline(h=0)
 
 #On peut créer un modèle sur 200 valeurs et regarder son comportement sur la prédiction
 #des 39 autres valeurs
-BFpredict<-predict(mod2,data.frame(bodyfat[201:239,]),interval="prediction",level=0.95)
-ecartPredict<-BFpredict[,1]*(100/bodyfat[201:239,1])
-plot(BFpredict[,1],bodyfat[201:239,1])
+BFpredict<-predict(mod2,data.frame(bodyfat[220:239,]),interval="prediction",level=0.95)
+ecartPredict<-BFpredict[,1]*(100/bodyfat[220:239,1])
+plot(BFpredict[,1],bodyfat[220:239,1])
 abline(0,1,col=2)
 abline(-8,1,col=1)
 abline(8,1,col=1)
 
-plot((BFpredict[,1]-bodyfat[201:239,1])*100/bodyfat[201:239,1])
-abline(h=-25,col=2)
-abline(h=25,col=2)
+plot((BFpredict[,1]-bodyfat[220:239,1])*100/bodyfat[220:239,1])
+abline(h=-0,col=2)
 #Potentiellement les grosses erreurs d'estimation pour personnes très musclés
 #Pas forcément de rapport physiologique entre "grosseur" et masse grasse
 
