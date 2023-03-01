@@ -12,7 +12,7 @@ The purpose of this project is to find an easier way to evaluate the bodyfat of 
 * Linear Regression
 * Predictive Modeling
 
-### Technologies
+### Technology
 * R 
 
 ## Needs of this project
