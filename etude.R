@@ -1,5 +1,5 @@
 #Chargement des données
-bodyfat<-donneesProjet
+bodyfat<-data
 
 #########################
 ### Etude descriptive ###
